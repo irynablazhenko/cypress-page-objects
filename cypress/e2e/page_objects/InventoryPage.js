@@ -32,6 +32,27 @@ class InventoryPage extends BasePage {
         this.shoppingCartIcon.click();
     }
 
+    getItemById(itemId) {
+        return cy.get(`#item_${itemId}_title_link`)
+    }
+
+    clickItemById(itemId) {
+        this.getItemById(itemId).click();
+    }
+
+    getItemByName(name) {
+        let names = [];
+        let itemName = ['Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Onesie', 'Test.allTheThings() T-Shirt (Red)', 'Sauce Labs Backpack', 'Sauce Labs Fleece Jacket']
+        cy.get('.inventory_item_name').each(($name) => {
+            cy.wrap($name).invoke('text').then((text) => {
+                if (text === name) {
+                    cy.get(`#item_${itemName.indexOf(text)}_title_link`).find('div').click();
+                }
+            })
+        });
+        cy.get('[data-test="inventory-item-name"').invoke('text').should('eq', name);
+    }
+
 }
 
 export default new InventoryPage();
