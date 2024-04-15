@@ -1,0 +1,8 @@
+{
+  "userNames": {
+    "correctUser": "standard_user"
+  },
+  "passwords": {
+    "correctPassword": "secret_sauce"
+  }
+}
