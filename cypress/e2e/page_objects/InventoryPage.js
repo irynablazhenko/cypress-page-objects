@@ -41,18 +41,22 @@ class InventoryPage extends BasePage {
     }
 
     getItemByName(name) {
-        let names = [];
-        let itemName = ['Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Onesie', 'Test.allTheThings() T-Shirt (Red)', 'Sauce Labs Backpack', 'Sauce Labs Fleece Jacket']
-        cy.get('.inventory_item_name').each(($name) => {
-            cy.wrap($name).invoke('text').then((text) => {
-                if (text === name) {
-                    cy.get(`#item_${itemName.indexOf(text)}_title_link`).find('div').click();
-                }
-            })
-        });
+        // with the dependencies on pre-written product names in the array
+        //
+        // let names = [];
+        // let itemName = ['Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Onesie', 'Test.allTheThings() T-Shirt (Red)', 'Sauce Labs Backpack', 'Sauce Labs Fleece Jacket']
+        // cy.get('.inventory_item_name').each(($name) => {
+        //     cy.wrap($name).invoke('text').then((text) => {
+        //         if (text === name) {
+        //             cy.get(`#item_${itemName.indexOf(text)}_title_link`).find('div').click();
+        //         }
+        //     })
+        // });
+
+        //easiest way
+        cy.get('[data-test="inventory-item-name"]').contains(name).click();
         cy.get('[data-test="inventory-item-name"').invoke('text').should('eq', name);
     }
-
 }
 
 export default new InventoryPage();
